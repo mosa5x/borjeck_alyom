@@ -115,50 +115,10 @@ async def main(start_date, end_date):
 import re
 from datetime import datetime
 
-def extract_horoscope_data(content):
-    zodiac_map = {
-        'الحمل': ('Aries', '♈'),
-        'الثور': ('Taurus', '♉'),
-        'الجوزاء': ('Gemini', '♊'),
-        'السرطان': ('Cancer', '♋'),
-        'الأسد': ('Leo', '♌'),
-        'العذراء': ('Virgo', '♍'),
-        'الميزان': ('Libra', '♎'),
-        'العقرب': ('Scorpio', '♏'),
-        'القوس': ('Sagittarius', '♐'),
-        'الجدي': ('Capricorn', '♑'),
-        'الدلو': ('Aquarius', '♒'),
-        'الحوت': ('Pisces', '♓'),
-    }
 
-    horoscopes = []
+logger = logging.getLogger(__name__)
 
-    for arabic_name, (english_name, symbol) in zodiac_map.items():
-        pattern = rf"#{arabic_name}\s*{symbol}(.*?)(#|$)"
-        match = re.search(pattern, content, re.DOTALL)
-        if match:
-            horoscope_text = match.group(1).strip()
-            
-            # Extract percentages
-            percentages_match = re.search(r'●مهنيا%(\d+)●ماليا%(\d+)\s*●عاطفيا%(\d+)●صحيا%(\d+)', horoscope_text)
-            if percentages_match:
-                percentages = percentages_match.groups()
-                
-                horoscopes.append({
-                    'name_ar': arabic_name,
-                    'name_en': english_name,
-                    'symbol': symbol,
-                    'content': horoscope_text,
-                    'professional_percentage': int(percentages[0]),
-                    'financial_percentage': int(percentages[1]),
-                    'emotional_percentage': int(percentages[2]),
-                    'health_percentage': int(percentages[3]),
-                })
 
-    return horoscopes
-
-import re
-from datetime import datetime
 
 def extract_horoscope_data(content):
     zodiac_map = {
@@ -183,11 +143,13 @@ def extract_horoscope_data(content):
         match = re.search(pattern, content, re.DOTALL)
         if match:
             horoscope_text = match.group(1).strip()
+            logger.debug(f"Found horoscope for {english_name}: {horoscope_text[:100]}...")
             
-            # Extract percentages
-            percentages_match = re.search(r'●مهنيا%(\d+)●ماليا%(\d+)\s*●عاطفيا%(\d+)●صحيا%(\d+)', horoscope_text)
+            # Extract percentages with a more flexible pattern
+            percentages_match = re.search(r'●مهنيا.*?(\d+).*?●ماليا.*?(\d+).*?●عاطفيا.*?(\d+).*?●صحيا.*?(\d+)', horoscope_text, re.DOTALL)
             if percentages_match:
                 percentages = percentages_match.groups()
+                logger.debug(f"Extracted percentages for {english_name}: {percentages}")
                 
                 horoscopes.append({
                     'name_ar': arabic_name,
@@ -199,6 +161,10 @@ def extract_horoscope_data(content):
                     'emotional_percentage': int(percentages[2]),
                     'health_percentage': int(percentages[3]),
                 })
+            else:
+                logger.warning(f"Could not extract percentages for {english_name}. Horoscope text: {horoscope_text}")
+        else:
+            logger.warning(f"Could not find horoscope for {english_name}")
 
     return horoscopes
 
@@ -208,6 +174,9 @@ def process_horoscopes(csv_file):
     for _, row in df.iterrows():
         content = row['Content']
         date_str = row['Date']
+        
+        logger.info(f"Processing content from {date_str}")
+        logger.debug(f"Content: {content}")  # Log the full content
         
         horoscopes = extract_horoscope_data(content)
         if horoscopes:
@@ -227,12 +196,9 @@ def process_horoscopes(csv_file):
                         'health_percentage': horoscope['health_percentage'],
                     }
                 )
-                print(f"Processed horoscope for {horoscope['name_en']} on {date}")
+                logger.info(f"Processed horoscope for {horoscope['name_en']} on {date}")
         else:
-            print(f"No horoscope data found in message from {date_str}")
-
-if __name__ == "__main__":
-    process_horoscopes('scraped_data_2024-10-16.csv')
+            logger.warning(f"No horoscope data found in message from {date_str}")
 
 @shared_task(name='myapp.tasks.scrape_and_process')
 def scrape_and_process():
