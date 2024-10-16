@@ -120,6 +120,13 @@ logger = logging.getLogger(__name__)
 
 
 
+
+def clean_horoscope_content(content):
+    # Remove lines starting with ':-' or containing '@'
+    lines = content.split('\n')
+    cleaned_lines = [line for line in lines if not line.strip().startswith(':-') and '@' not in line]
+    return '\n'.join(cleaned_lines).strip()
+
 def extract_horoscope_data(content):
     zodiac_map = {
         'الحمل': ('Aries', '♈'),
@@ -143,10 +150,11 @@ def extract_horoscope_data(content):
         match = re.search(pattern, content, re.DOTALL)
         if match:
             horoscope_text = match.group(1).strip()
-            logger.debug(f"Found horoscope for {english_name}: {horoscope_text[:100]}...")
+            cleaned_horoscope_text = clean_horoscope_content(horoscope_text)
+            logger.debug(f"Found horoscope for {english_name}: {cleaned_horoscope_text[:100]}...")
             
             # Extract percentages with a more flexible pattern
-            percentages_match = re.search(r'●مهنيا.*?(\d+).*?●ماليا.*?(\d+).*?●عاطفيا.*?(\d+).*?●صحيا.*?(\d+)', horoscope_text, re.DOTALL)
+            percentages_match = re.search(r'●مهنيا.*?(\d+).*?●ماليا.*?(\d+).*?●عاطفيا.*?(\d+).*?●صحيا.*?(\d+)', cleaned_horoscope_text, re.DOTALL)
             if percentages_match:
                 percentages = percentages_match.groups()
                 logger.debug(f"Extracted percentages for {english_name}: {percentages}")
@@ -155,14 +163,14 @@ def extract_horoscope_data(content):
                     'name_ar': arabic_name,
                     'name_en': english_name,
                     'symbol': symbol,
-                    'content': horoscope_text,
+                    'content': cleaned_horoscope_text,
                     'professional_percentage': int(percentages[0]),
                     'financial_percentage': int(percentages[1]),
                     'emotional_percentage': int(percentages[2]),
                     'health_percentage': int(percentages[3]),
                 })
             else:
-                logger.warning(f"Could not extract percentages for {english_name}. Horoscope text: {horoscope_text}")
+                logger.warning(f"Could not extract percentages for {english_name}. Horoscope text: {cleaned_horoscope_text}")
         else:
             logger.warning(f"Could not find horoscope for {english_name}")
 
