@@ -20,6 +20,6 @@ app.conf.timezone = 'Asia/Baghdad'
 app.conf.beat_schedule = {
     'scrape-and-process-daily': {
         'task': 'myapp.tasks.scrape_and_process',
-        'schedule': crontab(hour=23, minute=30),  # Run at 2:00 AM
+        'schedule': crontab(hour=17, minute=5),  # Run at 2:00 AM
     },
 }
