@@ -1,0 +1,67 @@
+
+
+div.container {
+    display: flex;
+    justify-content: flex-end; /* Aligns content to the right */
+    height: 100vh; /* Set the height as per your requirement */
+}
+  
+:root {
+    --primary-border-width: 0.5px;
+    --primary-border-color: rgb(233, 228, 228);
+}
+div.content{
+    text-align: right;
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 20px;
+    border: var(--primary-border-width) solid var(--primary-border-color);
+    margin-bottom: 30px;
+    margin-top: 30px;
+    border-radius: 30px;
+
+    
+
+}
+
+.content .line{
+    background-color: rgba(0, 0, 0, .32);
+
+    height: 1px;
+    width: 100%;
+    max-width: 130px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    
+
+}
+
+.content .horoscopename{
+    font-size: 30px;
+    line-height: 55px;
+}
+
+.content .date{
+    font-size: 20px;
+    line-height: 38px;
+    font-family: 'droid_arabic_kufiregular';
+    color: #ea0029;
+
+}
+
+.content .paragraph {
+    font-size: 20px;
+    line-height: 38px;
+    font-family: 'droid_arabic_kufiregular';
+    padding-bottom: 41px;
+}
+
+
+.img_div img{
+    width: 100%;
+    
+}
+
+

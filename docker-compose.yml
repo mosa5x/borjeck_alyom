@@ -2,10 +2,10 @@ version: '3'
 
 services:
   web:
-    build: .
+    build: ./backend
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/code
+      - ./backend:/code
     ports:
       - "8000:8000"
     depends_on:
@@ -15,10 +15,10 @@ services:
       - CELERY_RESULT_BACKEND=redis://redis:6379/0
 
   celery:
-    build: .
+    build: ./backend
     command: celery -A alabrage worker -l info
     volumes:
-      - .:/code
+      - ./backend:/code
     depends_on:
       - redis
     environment:
@@ -26,10 +26,10 @@ services:
       - CELERY_RESULT_BACKEND=redis://redis:6379/0
 
   celery-beat:
-    build: .
+    build: ./backend
     command: celery -A alabrage beat -l info
     volumes:
-      - .:/code
+      - ./backend:/code
     depends_on:
       - redis
     environment:
@@ -38,3 +38,15 @@ services:
 
   redis:
     image: "redis:alpine"
+
+  frontend:
+    build: ./frontend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000
+    depends_on:
+      - web
