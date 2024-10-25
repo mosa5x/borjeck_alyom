@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import '../css/Characteristics_of_thehorscope.css'
 const Characteristics_of_thehorscope = () => {
-    const { name } = useParams(); // Changed from id to name
+    const { name } = useParams();
     const [horoscopes, setHoroscopes] = useState([]);
     const [selectedHoroscope, setSelectedHoroscope] = useState(null);
     const [error, setError] = useState(null);
@@ -22,8 +22,10 @@ const Characteristics_of_thehorscope = () => {
                 const data = await response.json();
                 setHoroscopes(data);
                 
-                // Remove the prefix from the name
-                const horoscopeName = name.replace('برج-', '');
+                // Remove the prefix "صفات-برج-" from the name parameter
+                const horoscopeName = name.replace('صفات-برج-', '');
+                console.log('Looking for horoscope:', horoscopeName); // For debugging
+                
                 // Find horoscope by name_ar
                 const matchingHoroscope = data.find(horoscope => horoscope.name_ar === horoscopeName);
                 if (matchingHoroscope) {
@@ -39,9 +41,11 @@ const Characteristics_of_thehorscope = () => {
                 setLoading(false);
             }
         };
-    
+
         fetchHoroscopes();
     }, [name]);
+
+    // ... rest of your component code remains the same
 
     const formatCharacteristics = (text) => {
         if (!text) return [];
@@ -128,7 +132,7 @@ const Characteristics_of_thehorscope = () => {
                             ))}
                         </div>
                         <Link to={`/برج-${selectedHoroscope.name_ar}-اليوم`} className="daily-horoscope-link">
-                                عرض توقعات برجك لهذا اليوم
+                            عرض توقعات برجك لهذا اليوم
                         </Link>
                     </div>
                     <div className="horoscopes-sidebar">

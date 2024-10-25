@@ -15,6 +15,7 @@ const HoroscopeSign = ({ id, name_ar, name_en, date, symbol, content }) => (
     <p>{truncateContent(content.split('\n')[0], 75)}</p>
     <Link className="list_butten" to={`/برج-${name_ar}-اليوم`}>اقرى المزيد</Link>
 
+
   </div>
 );
 

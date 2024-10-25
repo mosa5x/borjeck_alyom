@@ -7,7 +7,7 @@ import HoroscopeDetail from './components/HoroscopeDetail';
 import HoroscopeCalculator from './components/HoroscopeCalculator';
 import Characteristics_of_thehorscope from './components/Characteristics_of_thehorscope';
 import HoroscopeCharacteristicsList from './components/HoroscopeCharacteristicsList';
-
+import RouteHandler from './components/RouteHandler';
 function App() {
   const [isHomeVisible, setHomeVisible] = useState(true);
 
@@ -57,9 +57,8 @@ function App() {
               <Route path="/" element={<HoroscopeList />} />
               <Route path="/توقعات-الأبراج-اليومية" element={<HoroscopeList />} />
               <Route path="/اعرف-برجك-من-خلال-تاريخ-ميلادك" element={<HoroscopeCalculator />} />
-              <Route path="/برج-:name-اليوم" element={<HoroscopeDetail />} />
               <Route path="/صفات-الابراج" element={<HoroscopeCharacteristicsList />} />
-              <Route path="/صفات-برج-:name" element={<Characteristics_of_thehorscope />} />
+              <Route path="/:name" element={<RouteHandler />} />
             </Routes>
           </main>
         </div>
