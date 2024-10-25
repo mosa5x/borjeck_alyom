@@ -7,4 +7,4 @@ class HoroscopeSignAdmin(admin.ModelAdmin):
     fields = ('name_en', 'name_ar', 'symbol', 'date', 'content', 
               'professional_percentage', 'financial_percentage', 
               'emotional_percentage', 'health_percentage',
-              'icon_image', 'post_image')
+              'icon_image', 'post_image','characteristics_of_thehorscope')

@@ -12,6 +12,7 @@ class HoroscopeSign(models.Model):
     health_percentage = models.IntegerField()
     icon_image = models.ImageField(upload_to='horoscope_images/', null=True, blank=True)
     post_image = models.ImageField(upload_to='horoscope_images/', null=True, blank=True)
+    characteristics_of_thehorscope = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.name_en} ({self.name_ar})"

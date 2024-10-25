@@ -13,7 +13,8 @@ const HoroscopeSign = ({ id, name_ar, name_en, date, symbol, content }) => (
     <h3>{name_ar}</h3>
     <p>{date}</p>
     <p>{truncateContent(content.split('\n')[0], 75)}</p>
-    <Link className="list_butten" to={`/horoscope/${id}`}>اقرى المزيد</Link>
+    <Link className="list_butten" to={`/برج-${name_ar}-اليوم`}>اقرى المزيد</Link>
+
   </div>
 );
 
@@ -46,19 +47,23 @@ const HoroscopeList = () => {
   if (horoscopes.length === 0) return <div>Loading horoscopes...</div>;
 
   return (
-    <div className="horoscope-container">
-      {horoscopes.map((horoscope) => (
-        <HoroscopeSign
-          key={horoscope.id}
-          id={horoscope.id}
-          name_ar={horoscope.name_ar}
-          name_en={horoscope.name_en}
-          date={horoscope.date}
-          symbol={horoscope.icon_image}
-          content={horoscope.content}
-        />
-      ))}
+    <div className='horoscopelist-container'>
+        <h1 className="rest_of_the_horoscopes">توقعات الأبراج لهذا اليوم </h1>
+        <div className="horoscope-container">
+          {horoscopes.map((horoscope) => (
+            <HoroscopeSign
+              key={horoscope.id}
+              id={horoscope.id}
+              name_ar={horoscope.name_ar}
+              name_en={horoscope.name_en}
+              date={horoscope.date}
+              symbol={horoscope.icon_image}
+              content={horoscope.content}
+            />
+          ))}
+       </div>
     </div>
+
   );
 };
 

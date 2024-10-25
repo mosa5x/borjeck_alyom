@@ -2,8 +2,9 @@
 
 div.container {
     display: flex;
-    justify-content: flex-end; /* Aligns content to the right */
-    height: 100vh; /* Set the height as per your requirement */
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: end;
 }
   
 :root {
@@ -21,6 +22,8 @@ div.content{
     margin-bottom: 30px;
     margin-top: 30px;
     border-radius: 30px;
+    margin-right: 20px;
+
 
     
 
@@ -64,4 +67,35 @@ div.content{
     
 }
 
+.Characteristics_butten {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+  
+.Characteristics_butten:hover {
+    background-color: #0056b3;;
+}
+  
+.rest_of_the_horoscopes{
+    font-size: 30px;
+    line-height: 55px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    border-radius: 30px;
+    margin-right: 20px;
 
+}
+
+
+@media (max-width: 480px) {
+    div.content{
+        width: 80%   
+    }
+
+
+}
