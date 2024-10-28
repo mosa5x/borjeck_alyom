@@ -87,7 +87,7 @@ const Characteristics_of_thehorscope = () => {
                 <meta property="og:description" content={`اكتشف صفات وخصائص برج ${selectedHoroscope.name_ar}: ${createMetaDescription(selectedHoroscope.characteristics_of_thehorscope)}`} />
                 <meta property="og:image" content={selectedHoroscope.icon_image} />
                 <meta property="og:url" content={`${window.location.origin}/characteristics/${selectedHoroscope.name_ar}`} />
-                <meta property="og:site_name" content="موقع الأبراج" />
+                <meta property="og:site_name" content="برجك اليوم" />
                 
                 {/* Twitter Card Tags */}
                 <meta name="twitter:card" content="summary_large_image" />
@@ -109,7 +109,7 @@ const Characteristics_of_thehorscope = () => {
                         },
                         "author": {
                             "@type": "Organization",
-                            "name": "موقع الأبراج"
+                            "name": "برجك اليوم"
                         }
                     })}
                 </script>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../css/Horoscope.css'
+import { Helmet } from 'react-helmet';
 
 const truncateContent = (content, maxLength) => {
   if (content.length <= maxLength) return content;
@@ -48,22 +49,57 @@ const HoroscopeList = () => {
   if (horoscopes.length === 0) return <div>Loading horoscopes...</div>;
 
   return (
-    <div className='horoscopelist-container'>
-        <h1 className="rest_of_the_horoscopes">توقعات الأبراج لهذا اليوم </h1>
-        <div className="horoscope-container">
-          {horoscopes.map((horoscope) => (
-            <HoroscopeSign
-              key={horoscope.id}
-              id={horoscope.id}
-              name_ar={horoscope.name_ar}
-              name_en={horoscope.name_en}
-              date={horoscope.date}
-              symbol={horoscope.icon_image}
-              content={horoscope.content}
-            />
-          ))}
-       </div>
-    </div>
+    <>
+                <Helmet>
+                    <title>توقعات الأبراج اليوم | أبراج اليوم والحظ اليومي</title>
+                    <meta name="description" content="اقرأ توقعات الأبراج اليومية مجاناً مع تحديث يومي لجميع الأبراج: الحمل، الثور، الجوزاء، السرطان، الأسد، العذراء، الميزان، العقرب، القوس، الجدي، الدلو، الحوت. توقعات الحب والعمل والصحة والحياة الشخصية" />
+                    <meta name="keywords" content="توقعات الأبراج اليوم, الأبراج اليومية, حظك اليوم, برج الحمل, برج الثور, برج الجوزاء, برج السرطان, برج الأسد, برج العذراء, برج الميزان, برج العقرب, برج القوس, برج الجدي, برج الدلو, برج الحوت" />
+                    
+                    {/* Open Graph Tags for better social sharing */}
+                    <meta property="og:type" content="website" />
+                    <meta property="og:title" content="توقعات الأبراج اليوم | أبراج اليوم والحظ اليومي" />
+                    <meta property="og:description" content="اقرأ توقعات الأبراج اليومية مجاناً لجميع الأبراج مع تحديث يومي. توقعات الحب والعمل والصحة والحياة الشخصية" />
+                    <meta property="og:url" content={window.location.origin} />
+                    <meta property="og:site_name" content="برجك اليوم" />
+
+                    {/* Twitter Card Tags */}
+                    <meta name="twitter:card" content="summary" />
+                    <meta name="twitter:title" content="توقعات الأبراج اليوم | أبراج اليوم والحظ اليومي" />
+                    <meta name="twitter:description" content="اقرأ توقعات الأبراج اليومية مجاناً لجميع الأبراج مع تحديث يومي. توقعات الحب والعمل والصحة والحياة الشخصية" />
+
+                    {/* Structured Data */}
+                    <script type="application/ld+json">
+                        {JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "WebPage",
+                            "name": "توقعات الأبراج اليوم",
+                            "description": "اقرأ توقعات الأبراج اليومية مجاناً مع تحديث يومي لجميع الأبراج",
+                            "url": window.location.origin,
+                            "publisher": {
+                                "@type": "Organization",
+                                "name": "برجك اليوم"
+                            }
+                        })}
+                    </script>
+                </Helmet>
+                <div className='horoscopelist-container'>
+                    <h1 className="rest_of_the_horoscopes">توقعات الأبراج لهذا اليوم </h1>
+                    <div className="horoscope-container">
+                      {horoscopes.map((horoscope) => (
+                        <HoroscopeSign
+                          key={horoscope.id}
+                          id={horoscope.id}
+                          name_ar={horoscope.name_ar}
+                          name_en={horoscope.name_en}
+                          date={horoscope.date}
+                          symbol={horoscope.icon_image}
+                          content={horoscope.content}
+                        />
+                      ))}
+                   </div>
+                </div>
+    </>
+
 
   );
 };
