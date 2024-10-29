@@ -54,12 +54,28 @@ MIDDLEWARE = [
 
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "15.185.205.92",
-    "http://localhost:3000"
-]
-
+CORS_ALLOW_ALL_ORIGINS = True  # For development only, configure more strictly for production
 CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
 
 
 ROOT_URLCONF = 'alabrage.urls'
