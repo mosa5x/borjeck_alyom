@@ -128,13 +128,13 @@ const HoroscopeCalculator = () => {
                 ))}
               </select>
             </div>
-            <button onClick={calculateZodiacSign}>عرض البرج</button>
+            <button className='HoroscopeCalculator_button' onClick={calculateZodiacSign}>عرض البرج</button>
             {error && <div className="error">{error}</div>}
             {zodiacSign && (
               <div className="result">
                 <h3>برجك هو: {zodiacSign.name_ar}</h3>
                 <img src={zodiacSign.icon_image} alt={zodiacSign.name_ar} className="horoscope-icon" />
-                <h4>خصائص البرج:</h4>
+                <h4>:صفات برج {zodiacSign.name_ar}</h4>
                 <div className="characteristics">
                   {formatCharacteristics(zodiacSign.characteristics_of_thehorscope).map((point, index) => (
                     <p key={index}>{point}</p>

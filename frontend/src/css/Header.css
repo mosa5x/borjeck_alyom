@@ -2,7 +2,7 @@
 :root {
     --mainColor: #29335c;
     --mainColorLight: #5767aa;
-    --secondaryColor: #db2b39;
+    --secondaryColor: #000000;
     --textColor: #eee;
   }
   
@@ -10,11 +10,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 80px;
+    height: 103px;
     padding: 0 1rem;
-    background-color: #000;
+    background-color: #921775;
     color: white;
-  }
+}
   
   nav ul {
     display: flex;
@@ -46,12 +46,12 @@
   }
   
   .logo-container {
+    padding-top: 10px;
     width: 20%;
-    padding-top: 1rem;
   }
   
   .logo-container img {
-    width: 14rem;
+    width: 52%;
   }
   
   .contactus_Header{
@@ -69,7 +69,7 @@
     border: none;
     color: white;
     cursor: pointer;
-    font-size: inherit;
+    font-size: 1.1rem;
     padding: 0.5rem 1rem;
   }
   
@@ -84,6 +84,15 @@
   }
   
   @media only screen and (max-width: 1024px) {
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: auto; 
+      padding: 0 1rem 0 0;
+      background-color: #921775;
+      color: white;
+  }
     header .nav-btn {
       visibility: visible;
       opacity: 1;
@@ -113,7 +122,7 @@
       align-items: center;
       justify-content: center;
       gap: 1.5rem;
-      background-color: black;
+      background-color: #921775;
       transition: 1s;
     }
   

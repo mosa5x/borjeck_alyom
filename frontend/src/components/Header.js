@@ -33,7 +33,7 @@ const Header = ({ toggleHomeVisibility }) => {
     <header className="header">
       <div className="logo-container">
         <Link to="/">
-          <img src='/image/Capture.PNG' alt="Horoscope Logo" className="logo" />
+          <img src='/hooscope logo copy 2.ico' alt="Horoscope Logo" className="logo" />
         </Link>
       </div>
       <nav ref={navRef}>

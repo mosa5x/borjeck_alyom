@@ -31,7 +31,7 @@ const HoroscopeCharacteristicsList = () => {
         fetchHoroscopes();
     }, []);
 
-    if (loading) return <div className="loading">جاري التحميل...</div>;
+    if (loading) return <div className="loading"></div>;
     if (error) return <div className="error">{error}</div>;
 
     return (

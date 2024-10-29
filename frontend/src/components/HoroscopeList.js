@@ -46,7 +46,7 @@ const HoroscopeList = () => {
   }, []);
 
   if (error) return <div>Error: {error}</div>;
-  if (horoscopes.length === 0) return <div>Loading horoscopes...</div>;
+  if (horoscopes.length === 0) return <div></div>;
 
   return (
     <>

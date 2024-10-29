@@ -68,7 +68,7 @@ const Characteristics_of_thehorscope = () => {
         return points.slice(0, 3).join(' '); // First 3 points for description
     };
 
-    if (loading) return <div className="loading">جاري التحميل...</div>;
+    if (loading) return <div className="loading"></div>;
     if (error) return <div className="error">{error}</div>;
     if (!selectedHoroscope) return <div className="no-data">لم يتم العثور على معلومات البرج</div>;
 

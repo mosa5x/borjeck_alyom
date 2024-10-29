@@ -13,7 +13,7 @@ app.conf.timezone = 'Asia/Baghdad'
 app.conf.beat_schedule = {
     'first-scrape': {
         'task': 'myapp.tasks.first_scrape',
-        'schedule': crontab(hour=0, minute=27),  # 1:10 AM Baghdad time
+        'schedule': crontab(hour=1, minute=27),  # 1:10 AM Baghdad time
     },
     'second-scrape': {
         'task': 'myapp.tasks.second_scrape',
